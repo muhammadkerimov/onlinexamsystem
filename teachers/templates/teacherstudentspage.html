@@ -1,0 +1,99 @@
+
+<head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <link rel="icon" href="logo.png">
+  <title>Ana Səhifə | BTN</title>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-secondary navbar-dark">
+  <!-- Brand -->
+  {% load static %}
+  <a class="navbar-brand text-dark" href="#"><img src="{% static 'logo.png' %}" width="80" ></a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" >
+    <span class="navbar-toggler-icon" style="color:black;"></span>
+    <style>
+    /* Change the color of the navbar toggler icon */
+    .navbar-toggler-icon {
+      color: #FF0000; /* Replace with the desired color value */
+    }
+  </style>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse " id="collapsibleNavbar">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="nav-link text-white" href="main">Ana Səhifə</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="exams">İmtahan Əlavə Et</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="addquestion">Sual Əlavə Et</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="questionbank">Sual Bankı</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">Şagirdlər</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url 'logoutt' %}"><span class="fa fa-globe" ></span>Çıxış Et</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container table-responsive">
+    {% if messages %}
+    {% for message in messages %}
+       <div class="alert alert-success text-center" id="alertdelete" role="alert">{{ message }}</div>
+    {% endfor %}
+ {% endif %} 
+    <table class="table" id="students">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Şagird Adı</th>
+          <th scope="col">Soyadı</th>
+          <th scope="col">Valideyn Adı</th>
+          <th scope="col">Sinif</th>
+          <th scope="col">Əməliyyat</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <td></td>
+          <td>{{ user.ad }}</td>
+          <td>{{ user.soyad }}</td>
+          <td>{{ user.parent_name }}</td>
+          <td>{{ user.grade }}</td>
+          <td><form method="post" action="{% url 'delete' %}">{% csrf_token %}<button type="submit" name="deletestudent" class="btn btn-danger"  value="{{ user.mail }}">Şagirdi Sil</button></form></td>
+        </tr>
+      {% endfor %}
+    
+    
+      </tbody>
+    </table>
+    <style>
+        #students{
+            max-width:10cm;
+        }
+        #alertdelete{
+            max-width: 4cm;
+        }
+    </style>
+
+    </div>
+
+</body>

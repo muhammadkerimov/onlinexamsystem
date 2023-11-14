@@ -1,0 +1,75 @@
+
+<head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <link rel="icon" href="logo.png">
+  <title>Ana Səhifə | BTN</title>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-secondary navbar-dark">
+  <!-- Brand -->
+  {% load static %}
+  <a class="navbar-brand text-dark" href="#"><img src="{% static 'logo.png' %}" width="80" ></a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" >
+    <span class="navbar-toggler-icon" style="color:black;"></span>
+    <style>
+    /* Change the color of the navbar toggler icon */
+    .navbar-toggler-icon {
+      color: #FF0000; /* Replace with the desired color value */
+    }
+  </style>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse " id="collapsibleNavbar">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">Ana Səhifə</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="exams">İmtahan Əlavə Et</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="addquestion">Sual Əlavə Et</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="questionbank">Sual Bankı</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="students">Şagirdlər</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url 'logoutt' %}"><span class="fa fa-globe" ></span>Çıxış Et</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+    
+  <h1 class="header-title" id="welc">Salam , Xoş Gəlmişsən {{request.session.teacher_ad.0}}</b></h1>
+  <style>
+      #welc{
+      font-family:24px "Cerebri Sans",sans-serif;
+      font:24px;
+      }
+  </style>
+    
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+</body>

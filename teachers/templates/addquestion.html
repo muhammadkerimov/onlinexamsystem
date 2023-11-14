@@ -1,0 +1,143 @@
+{% load static %}
+<head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+ 
+  <link rel="icon" href="logo.png">
+  <title>Ana Səhifə | BTN</title>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-secondary navbar-dark">
+  <!-- Brand -->
+  
+  <a class="navbar-brand text-dark" href="#"><img src="{% static 'logo.png' %}" width="80" ></a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" >
+    <span class="navbar-toggler-icon" style="color:black;"></span>
+    <style>
+    /* Change the color of the navbar toggler icon */
+    .navbar-toggler-icon {
+      color: #FF0000; /* Replace with the desired color value */
+    }
+  </style>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse " id="collapsibleNavbar">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="nav-link text-white" href="main">Ana Səhifə</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="exams">İmtahan Əlavə Et</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">Sual Əlavə Et</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="questionbank">Sual Bankı</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="students">Şagirdlər</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url 'logoutt' %}"><span class="fa fa-globe" ></span>Çıxış Et</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+     
+    <form style="max-width: 8cm;" method="post">
+        {%csrf_token%}
+            {% if messages %}
+        {% for message in messages %}
+           <div class="alert alert-success text-center" id="alertdelete" role="alert">{{ message }}</div>
+        {% endfor %}
+     {% endif %} 
+    
+            
+            
+            <div class="form-group">
+              <label for="question">Sual</label>
+              <textarea type="text" class="form-control" id="question" name="question" placeholder="Sual"></textarea>
+            </div>
+               <div class="form-group">
+                <label for="topic">Mövzu</label>
+                <select name="topic" id="topic" class="form-control">
+                   {%for topic in topics%}
+                  <option value="{{topic.0}}">{{topic.1}}</option>
+                    {%endfor%}
+                    
+                  </select>
+                </div>
+                
+            <div class="form-group">
+                <label for="choice1">Sual Tipi</label>
+                <select class="form-control" id="type" name="type" placeholder="">
+                <option value="close">Qapalı</option>
+                <option value="open">Açıq</option>
+                </select>
+            </div>
+            <div id="closedelements" >
+            <div class="form-group">
+                <label for="choice1">Seçim 1</label>
+                <input type="text" class="form-control" id="choice1" name="choice1" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="choice1">Seçim 2</label>
+                <input type="text" class="form-control" id="choice2" name="choice2" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="choice1">Seçim 3</label>
+                <input type="text" class="form-control" id="choice3" name="choice3" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="choice1">Seçim 4</label>
+                <input type="text" class="form-control" id="choice4" name="choice4" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="choice1">Seçim 5</label>
+                <input type="text" class="form-control" id="choice5" name="choice5" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="correct">Doğru Cavab</label>
+                <input type="text" class="form-control" id="correct" name="correctc" placeholder="">
+            </div>
+            </div>
+            <div id="openedselection" style="display: none;">
+                <div class="form-group">
+                    <label for="correct">Doğru Cavab</label>
+                    <input type="text" class="form-control" id="correct" name="correcto" placeholder="">
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Əlavə Et</button>
+          </form>
+
+</div>
+<script >
+  const typeselector = document.getElementById('type')
+const openedelement = document.getElementById('openedselection')
+const closedelements = document.getElementById('closedelements')
+    
+    typeselector.addEventListener('change', function () {
+        if (typeselector.value === 'open') {
+            openedelement.style.display = 'block';
+            closedelements.style.display = 'none';
+        } else if (typeselector.value === 'close') {
+            openedelement.style.display = 'none';
+            closedelements.style.display = 'block';
+        }
+    });
+</script>
+
+</body>
